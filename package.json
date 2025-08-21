@@ -1,0 +1,24 @@
+{
+  "name": "devops-mikroservices-project",
+  "version": "1.0.0",
+  "description": "A comprehensive DevOps microservices project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests configured yet. Add test scripts here.\"",
+    "test:services": "echo \"No service tests configured yet.\"",
+    "test:integration": "echo \"No integration tests configured yet.\"",
+    "test:e2e": "echo \"No e2e tests configured yet.\"",
+    "lint": "echo \"No linting configured yet. Add ESLint or similar.\"",
+    "lint:fix": "echo \"No auto-fix configured yet.\"",
+    "format": "echo \"No formatting configured yet. Add Prettier or similar.\"",
+    "format:check": "echo \"No format checking configured yet.\"",
+    "type-check": "echo \"No TypeScript configured yet.\"",
+    "start": "echo \"No application to start yet. Implement services first.\"",
+    "dev": "echo \"No development server configured yet.\""
+  },
+  "keywords": ["microservices", "devops", "nodejs", "docker", "kubernetes"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

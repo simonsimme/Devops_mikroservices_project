@@ -1,0 +1,64 @@
+services:
+  # Example services - uncomment when implementing
+  
+  # gateway:
+  #   build: ./gateway
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NODE_ENV=development
+  #   depends_on:
+  #     - user-service
+  #     - item-service
+  
+  # user-service:
+  #   build: ./services/user-service
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DATABASE_URL=postgresql://user:password@postgres:5432/userdb
+  
+  # item-service:
+  #   build: ./services/item-service
+  #   ports:
+  #     - "3002:3002"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DATABASE_URL=postgresql://user:password@postgres:5432/itemdb
+  
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - REACT_APP_API_URL=http://gateway:3000
+  
+  # Database services
+  # postgres:
+  #   image: postgres:14
+  #   environment:
+  #     POSTGRES_DB: mikroservices
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+
+  # Placeholder service for testing Docker Compose
+  hello-world:
+    image: hello-world
+    restart: "no"
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: mikroservices-network
