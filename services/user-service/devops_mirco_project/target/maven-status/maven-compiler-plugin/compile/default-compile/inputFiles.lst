@@ -3,6 +3,7 @@ C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-se
 C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\auth\dto\LoginRequest.java
 C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\auth\dto\RegisterRequest.java
 C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\auth\JwtService.java
+C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\exception\GlobalExceptionHandler.java
 C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\HomeController.java
 C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\Main.java
 C:\Users\46725\Documents\DV\devops\Devops_mikroservices_project\services\user-service\devops_mirco_project\src\main\java\com\devopservice\security\JwtAuthFilter.java

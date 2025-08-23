@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/user-service/devops_mirco_project
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,11 +24,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build user-service
-        run: |
-          cd services/user-service/devops_mirco_project
-          mvn clean compile
+        run: mvn clean compile
 
       - name: Run tests
-        run: |
-          cd services/user-service/devops_mirco_project
-          mvn test
+        run: mvn test
