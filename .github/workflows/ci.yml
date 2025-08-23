@@ -9,9 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: 
+          - user-service
+          
+    
     defaults:
       run:
-        working-directory: services/user-service/devops_mirco_project
+        working-directory: services/${{ matrix.service }}/devops_mirco_project
     
     steps:
       - name: Checkout code
@@ -23,8 +29,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build user-service
+      - name: Build ${{ matrix.service }}
         run: mvn clean compile
 
-      - name: Run tests
+      - name: Run tests for ${{ matrix.service }}
         run: mvn test
