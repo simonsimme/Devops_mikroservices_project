@@ -13,6 +13,7 @@ jobs:
       matrix:
         service: 
           - user-service
+          - item-service
           
     
     defaults:

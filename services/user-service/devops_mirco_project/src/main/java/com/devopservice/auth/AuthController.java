@@ -44,6 +44,7 @@ public class AuthController {
   public AuthResponse login(@RequestBody @Valid LoginRequest req) {
     var u = users.findByEmail(req.email().toLowerCase())
       .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
+      
     if (!encoder.matches(req.password(), u.getPasswordHash())) {
       throw new IllegalArgumentException("Invalid credentials");
     }
