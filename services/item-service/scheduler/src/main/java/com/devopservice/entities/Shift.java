@@ -6,10 +6,13 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
-@Table(name = "Shift")
+@Table(name = "shift")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -37,12 +40,15 @@ public class Shift {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "worker_id", insertable = false, updatable = false)
+    @JsonIgnore  
     private Worker worker;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "required_role", referencedColumnName = "name", insertable = false, updatable = false)
+    @JsonIgnore  
     private Roles requiredRoleEntity;
     
     @OneToMany(mappedBy = "shift", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  
     private List<ShiftAssignment> shiftAssignments;
 }

@@ -5,8 +5,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "ShiftAssignment")
+@Table(name = "shiftassignment")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,10 +30,12 @@ public class ShiftAssignment {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shift_id", insertable = false, updatable = false)
+    @JsonIgnore  
     private Shift shift;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "worker_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Worker worker;
     
     @PrePersist
