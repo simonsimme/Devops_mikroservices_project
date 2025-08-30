@@ -6,6 +6,7 @@ CREATE TABLE worker(
     id UUID PRIMARY KEY,
     name TEXT NOT NULL,
     role TEXT NOT NULL REFERENCES roles(name)
+        , user_id UUID UNIQUE -- references user-service user id
 );
 
 CREATE TABLE shift(

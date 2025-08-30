@@ -27,7 +27,10 @@ public class Worker {
     
     @Column(nullable = false)
     private String role;
-    
+
+    @Column(name = "user_id", unique = true, nullable = false)
+    private UUID userId;
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "role", referencedColumnName = "name", insertable = false, updatable = false)
 @JsonIgnore  // <-- Add this annotation

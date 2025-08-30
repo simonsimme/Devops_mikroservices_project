@@ -35,7 +35,12 @@ public class WorkerController {
     public List<Worker> getWorkersByRole(@PathVariable String role) {
         return workerRepository.findByRole(role);
     }
-    
+
+    @GetMapping("/user/{userId}")
+    public List<Worker> getWorkersByUserId(@PathVariable UUID userId) {
+        return workerRepository.findByUserId(userId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Worker createWorker(@RequestBody @Valid CreateWorkerRequest request) {
