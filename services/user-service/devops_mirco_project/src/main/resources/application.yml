@@ -8,7 +8,7 @@ spring:
     password: ${DB_PASS:pass}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     open-in-view: false
   flyway:
     enabled: false
