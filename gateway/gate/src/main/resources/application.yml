@@ -4,27 +4,28 @@ server:
 spring:
   application:
     name: api-gateway
-
-app:
-  jwt:
-    secret: ${JWT_SECRET:change-me}
-
-
   cloud:
     gateway:
       routes:
-        # Route to user-service
+        # Route to user-service (for all auth endpoints)
         - id: user-service
           uri: http://localhost:8082
           predicates:
-            - Path=/users/**
-
+            - Path=/api/auth/**
         # Route to item-service
         - id: item-service
           uri: http://localhost:8081
           predicates:
             - Path=/items/**
-
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
         - RemoveRequestHeader=Cookie
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me}
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG

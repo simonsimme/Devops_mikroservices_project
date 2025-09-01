@@ -8,12 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.security.Keys;
-
-import java.nio.charset.StandardCharsets;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 
 @Component
 public class JwtAuthenticationFilter implements GlobalFilter {
@@ -26,7 +24,7 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         String path = exchange.getRequest().getURI().getPath();
 
         // Skip auth for login/register
-        if (path.startsWith("/users/login") || path.startsWith("/users/register")) {
+        if (path.startsWith("/api/auth/login") || path.startsWith("/api/auth/register")) {
             return chain.filter(exchange);
         }
 
@@ -40,20 +38,17 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         String token = authHeader.substring(7);
 
         try {
-            Claims claims = Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            DecodedJWT jwt = JWT.require(algorithm).build().verify(token);
 
             // Forward user id (sub claim) to downstream services
             exchange.mutate()
                 .request(exchange.getRequest().mutate()
-                    .header("X-User-Id", claims.getSubject())
+                    .header("X-User-Id", jwt.getSubject())
                     .build())
                 .build();
 
-        } catch (JwtException e) {
+        } catch (JWTVerificationException e) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         }
