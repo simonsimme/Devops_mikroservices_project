@@ -37,7 +37,7 @@ public class AuthController {
       .createdAt(OffsetDateTime.now())
       .build();
     users.save(u);
-    return new AuthResponse(jwt.generate(u.getId().toString()));
+    return new AuthResponse(jwt.generate(u.getId().toString()), u.getId());
   }
 
   @PostMapping("/login")
@@ -48,7 +48,7 @@ public class AuthController {
     if (!encoder.matches(req.password(), u.getPasswordHash())) {
       throw new IllegalArgumentException("Invalid credentials");
     }
-    return new AuthResponse(jwt.generate(u.getId().toString()));
+    return new AuthResponse(jwt.generate(u.getId().toString()), u.getId());
   }
 
   @GetMapping("/users") //ONLY IN TESTING REMOVE ON PRODUCTION

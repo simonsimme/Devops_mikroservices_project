@@ -2,12 +2,15 @@
 
 import './Login.css';
 import React, { useState } from 'react';
+import Schedule from './landingpage.js';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
     const [theme, setTheme] = useState('light');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleThemeToggle = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
@@ -25,6 +28,11 @@ function Login() {
     if (response.ok) {
       // Successful login
       alert('Login successful!');
+      const token = data.token;
+      const user_id = data.userId;
+      alert(user_id)
+      navigate('/landing', { state: { token, user_id} });
+
       // Save token, redirect, etc.
     } else {
       // Show error

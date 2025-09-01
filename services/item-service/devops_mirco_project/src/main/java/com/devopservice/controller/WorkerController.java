@@ -6,12 +6,16 @@ import com.devopservice.repositories.WorkerRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
 
+// Add import for WorkerDto if it exists in your project
+import com.devopservice.dto.WorkerDto;
+
 @RestController
-@RequestMapping("/api/workers")
+@RequestMapping("/api/scheduler")
 public class WorkerController {
     
     private final WorkerRepository workerRepository;
@@ -43,13 +47,23 @@ public class WorkerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Worker createWorker(@RequestBody @Valid CreateWorkerRequest request) {
+    public Worker createWorker(@RequestBody @Valid CreateWorkerRequest request, @RequestHeader("X-User-Id") UUID userId) {
         Worker worker = Worker.builder()
-            .id(UUID.randomUUID())
-            .name(request.name())
-            .role(request.role())
-            .build();
-        
+                .id(UUID.randomUUID())
+                .name(request.name())
+                .role(request.role())
+                .userId(userId)
+                .build();
         return workerRepository.save(worker);
     }
+
+@GetMapping("/me")
+public WorkerDto getWorkerInfo(@RequestHeader("X-User-Id") UUID userId) {
+    List<Worker> workers = workerRepository.findByUserId(userId);
+    if (workers.isEmpty()) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+    Worker worker = workers.get(0);
+    return new WorkerDto(worker.getId(), worker.getName(), worker.getRole());
+}
 }
