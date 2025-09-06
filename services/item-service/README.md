@@ -239,25 +239,7 @@ SHOW_SQL=false
 MANAGEMENT_ENDPOINTS=health,info,metrics,prometheus
 ```
 
-## 🧪 Testing
 
-### Run Tests
-```bash
-# Run all tests
-mvn test
-
-# Run with coverage
-mvn test jacoco:report
-```
-
-### Test Categories
-- **Unit Tests** - Entity logic and business rules
-- **Integration Tests** - API endpoint testing
-- **Repository Tests** - Database layer testing
-- **Controller Tests** - REST API testing
-
-### Test Database
-Tests use H2 in-memory database for isolation and speed.
 
 ## 📊 Database Migrations
 
@@ -320,44 +302,9 @@ Key metrics monitored:
 - **Role Consistency** - Validates worker-role assignments
 - **Constraint Enforcement** - Database-level integrity checks
 
-## 🚀 Deployment
 
-### Docker Deployment
-```dockerfile
-FROM openjdk:17-jre-slim
-COPY target/devops_micro_project-1.0-SNAPSHOT.jar app.jar
-EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
 
-### Production Considerations
-- **Connection Pooling** - Configure HikariCP for optimal performance
-- **Database Migrations** - Ensure Flyway runs on startup
-- **Health Monitoring** - Configure monitoring dashboards
-- **Backup Strategy** - Regular PostgreSQL backups
 
-## 🔍 Troubleshooting
-
-### Common Issues
-1. **Database Connection** - Check Docker container status
-2. **Port Conflicts** - Ensure port 8081 is available
-3. **Migration Failures** - Check Flyway migration scripts
-4. **Memory Issues** - Configure JVM heap size appropriately
-
-### Debug Commands
-```bash
-# Check database container
-docker ps | grep scheduler
-
-# View database logs
-docker logs item-service-db
-
-# Check service logs
-mvn spring-boot:run | tee service.log
-
-# Test database connection
-docker exec -it item-service-db psql -U postgres -d scheduler_db
-```
 
 ## 🤝 Contributing
 

@@ -364,29 +364,7 @@ kubectl port-forward service/scheduler-db 5434:5432
 kubectl port-forward service/frontend 3000:80
 ```
 
-## 🚀 Production Considerations
 
-### Resource Limits
-```yaml
-resources:
-  requests:
-    memory: "256Mi"
-    cpu: "250m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
-```
-
-### Security Best Practices
-- **RBAC** - Role-based access control
-- **Network Policies** - Pod-to-pod communication rules
-- **Security Contexts** - Container security settings
-- **Pod Security Standards** - Cluster-wide security policies
-
-### Backup Strategy
-- **Database Backups** - Regular PostgreSQL dumps
-- **Persistent Volume Snapshots** - Storage-level backups
-- **Configuration Backups** - GitOps for manifest versioning
 
 ## 🛠️ Development Workflow
 

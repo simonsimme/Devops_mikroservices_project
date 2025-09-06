@@ -139,25 +139,7 @@ GET    /actuator/health   # Health check
 - **Password**: password
 - **Container**: item-service-db
 
-## 🧪 Testing
 
-### Run All Tests
-```bash
-# Test User Service
-cd services/user-service/devops_mirco_project
-mvn test
-
-# Test Item Service
-cd services/item-service/devops_mirco_project
-mvn test
-```
-
-### Test Coverage
-Both services include:
-- **Unit Tests** - Entity and service logic testing
-- **Integration Tests** - API endpoint testing
-- **Database Tests** - Data layer testing with H2
-- **Security Tests** - Authentication and authorization
 
 ## 🔧 Development
 
@@ -220,29 +202,3 @@ For detailed information about each service:
 - **[User Service](./user-service/README.md)** - Complete authentication service documentation
 - **[Item Service](./item-service/README.md)** - Item management service documentation
 
-## 🔍 Troubleshooting
-
-### Common Issues
-1. **Port Conflicts** - Check if ports 5433/5434 are available
-2. **Database Connection** - Ensure Docker containers are running
-3. **Service Startup** - Check Java version and Maven configuration
-4. **Authentication** - Verify JWT secret configuration
-
-### Debug Commands
-```bash
-# Check running services
-ps aux | grep java
-
-# Check database connectivity
-docker exec -it user-service-db psql -U user -d users_db
-
-# View service logs
-mvn spring-boot:run | tee service.log
-```
-
----
-
-**Total Services**: 2 (User Service, Item Service)  
-**Database Engine**: PostgreSQL  
-**Architecture**: Domain-driven microservices  
-**Communication**: REST APIs via API Gateway

@@ -66,12 +66,7 @@ The frontend connects to backend services through the API Gateway at:
 For detailed setup, development, and deployment instructions, see:
 - **[DevOps Frontend README](./devops-frontend/README.md)** - Comprehensive application documentation
 
-## 🧪 Testing
 
-```bash
-cd devops-frontend
-npm test
-```
 
 ## 🛠️ Technology Stack
 

@@ -192,29 +192,7 @@ spring:
           lower-case-service-id: true
 ```
 
-## 🧪 Testing
 
-### Unit Tests
-```bash
-mvn test
-```
-
-### Integration Tests
-```bash
-# Test with running services
-mvn integration-test
-```
-
-### Manual Testing
-```bash
-# Test gateway health
-curl http://localhost:8080/actuator/health
-
-# Test authentication flow
-curl -X POST http://localhost:8080/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password"}'
-```
 
 ## 📊 Monitoring & Observability
 
@@ -238,57 +216,9 @@ Key metrics monitored:
 - Error rates
 - Active connections
 
-## 🚀 Deployment
 
-### Production Considerations
-- **Load Balancing** - Deploy multiple gateway instances
-- **SSL/TLS** - Enable HTTPS in production
-- **Rate Limiting** - Configure request throttling
-- **Service Discovery** - Use Eureka or Consul for dynamic routing
 
-### Docker Deployment
-```dockerfile
-FROM openjdk:17-jre-slim
-COPY target/gate-1.0-SNAPSHOT.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
 
-### Kubernetes Deployment
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: api-gateway
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: api-gateway
-  template:
-    spec:
-      containers:
-      - name: gateway
-        image: gateway-service:latest
-        ports:
-        - containerPort: 8080
-```
-
-## 🔍 Troubleshooting
-
-### Common Issues
-1. **Service Not Found** - Check service URLs and availability
-2. **Authentication Failures** - Verify JWT secret configuration
-3. **CORS Errors** - Update CORS configuration for frontend URL
-4. **Route Not Matching** - Check route predicates and patterns
-
-### Debug Mode
-```yaml
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    reactor.netty: DEBUG
-```
 
 ---
 
