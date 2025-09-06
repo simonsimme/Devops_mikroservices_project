@@ -117,23 +117,7 @@ The application will be available at:
 - `GET /actuator/health` - Service health status
 - `GET /actuator/info` - Service information
 
-## 🧪 Testing
 
-Each service includes comprehensive test suites:
-
-```bash
-# Test User Service
-cd services/user-service/devops_mirco_project
-mvn test
-
-# Test Item Service  
-cd services/item-service/devops_mirco_project
-mvn test
-
-# Test Frontend
-cd frontend/devops-frontend
-npm test
-```
 
 ## 🔧 Development
 

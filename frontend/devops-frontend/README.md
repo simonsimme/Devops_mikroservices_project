@@ -77,25 +77,7 @@ Update API base URL in source files as needed:
 - **Development**: http://localhost:8080 (API Gateway)
 - **Production**: Configure via environment variables
 
-## 🧪 Testing
 
-### Run Tests
-```bash
-# Run test suite
-npm test
-```
-
-### Testing Tools
-- **React Testing Library** - Component testing
-- **Jest** - Test runner and assertions
-- **User Event** - User interaction testing
-
-### Test Coverage
-The application includes tests for:
-- Component rendering
-- User interactions
-- API integration
-- Routing functionality
 
 ## 🎨 Styling
 
@@ -165,27 +147,7 @@ Route Structure:
 - `@testing-library/*` - Testing utilities
 - `react-scripts` - Build tools and dev server
 
-## 🚀 Deployment
 
-### Docker Deployment
-The application can be containerized for production deployment:
-
-```dockerfile
-# Example Dockerfile approach
-FROM node:16-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-EXPOSE 80
-CMD ["npx", "serve", "-s", "build", "-l", "80"]
-```
-
-### Production Considerations
-- **Environment Variables** - Configure API endpoints
-- **Build Optimization** - Minified and optimized assets
-- **Static Hosting** - Can be served from any static web server
 
 ## 🔍 Performance
 

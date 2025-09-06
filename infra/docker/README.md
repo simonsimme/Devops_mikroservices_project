@@ -191,92 +191,9 @@ To modify the startup behavior:
 3. Modify service startup sequence
 4. Change terminal/window creation logic
 
-## 🧪 Testing the Setup
 
-### Health Checks
-```bash
-# Check all databases
-docker ps | grep postgres
 
-# Check service endpoints
-curl http://localhost:8080/actuator/health  # Gateway
-curl http://localhost:8080/actuator/health  # User Service (via gateway)
-curl http://localhost:8081/actuator/health  # Scheduler Service
 
-# Check database connectivity
-docker exec user-service-db pg_isready -U user -d users_db
-```
-
-### Smoke Test
-```bash
-# Test user registration
-curl -X POST http://localhost:8080/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test User","email":"test@example.com","password":"password"}'
-
-# Test scheduler service
-curl http://localhost:8081/api/workers
-```
-
-## 🔍 Troubleshooting
-
-### Common Issues
-
-#### Port Conflicts
-```bash
-# Check what's using ports
-lsof -i :5433  # User database
-lsof -i :5434  # Scheduler database
-lsof -i :8080  # Gateway/User service
-lsof -i :8081  # Scheduler service
-
-# Kill processes if needed
-sudo kill -9 <PID>
-```
-
-#### Database Connection Issues
-```bash
-# Check container status
-docker ps -a | grep postgres
-
-# Restart databases
-cd services/user-service && docker compose restart
-cd services/item-service/devops_mirco_project && docker compose restart
-
-# Check logs
-docker logs user-service-db
-```
-
-#### Service Startup Issues
-```bash
-# Check Java version
-java -version
-
-# Check Maven
-mvn -version
-
-# Verify project structure
-ls -la services/user-service/devops_mirco_project/pom.xml
-ls -la services/item-service/devops_mirco_project/pom.xml
-ls -la gateway/gate/pom.xml
-```
-
-### Clean Reset
-```bash
-# Stop all services
-docker compose down
-
-# Remove all containers and volumes
-docker compose down -v --remove-orphans
-
-# Clean Maven builds
-cd services/user-service/devops_mirco_project && mvn clean
-cd services/item-service/devops_mirco_project && mvn clean
-cd gateway/gate && mvn clean
-
-# Restart from scratch
-./start-backend.sh
-```
 
 ## 📚 Related Documentation
 
