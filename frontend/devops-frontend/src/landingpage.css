@@ -17,7 +17,6 @@
   box-shadow: 0 4px 24px rgba(49,130,206,0.12);
   padding: 2.5rem 2rem;
   width: 100%;
-  max-width: 420px;
   text-align: center;
   transition: background 0.3s, color 0.3s;
 }
@@ -45,6 +44,9 @@
 
 .logo-bg {
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .company-logo {

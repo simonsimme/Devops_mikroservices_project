@@ -44,4 +44,12 @@ public class ShiftAssignment {
             assignedAt = LocalDateTime.now();
         }
     }
+
+    public UUID getShiftId() {
+        return this.shiftId;
+    }
+
+    public UUID getWorkerId() {
+        return this.workerId;
+    }
 }

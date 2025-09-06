@@ -3,24 +3,30 @@ package com.devopservice.controller;
 import com.devopservice.entities.Shift;
 import com.devopservice.dto.CreateShiftRequest;
 import com.devopservice.repositories.ShiftRepository;
+import com.devopservice.repositories.ShiftAssignmentRepository;
+import com.devopservice.entities.ShiftAssignment;
 
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/shifts")
 public class ShiftController {
     
     private final ShiftRepository shiftRepository;
-    
-    public ShiftController(ShiftRepository shiftRepository) {
+    private final ShiftAssignmentRepository shiftAssignmentRepository;
+
+    public ShiftController(ShiftRepository shiftRepository, ShiftAssignmentRepository shiftAssignmentRepository) {
         this.shiftRepository = shiftRepository;
+        this.shiftAssignmentRepository = shiftAssignmentRepository;
     }
     
     @GetMapping
@@ -42,14 +48,26 @@ public class ShiftController {
     
     @GetMapping("/unassigned")
     public List<Shift> getUnassignedShifts() {
-        return shiftRepository.findByWorkerIdIsNull();
-    }
+    List<UUID> assignedShiftIds = shiftAssignmentRepository.findAll()
+        .stream()
+        .map(ShiftAssignment::getShiftId)
+        .collect(Collectors.toList());
+    return shiftRepository.findAll().stream()
+        .filter(shift -> !assignedShiftIds.contains(shift.getId()))
+        .collect(Collectors.toList());
+}
     
     @GetMapping("/role/{role}")
     public List<Shift> getShiftsByRole(@PathVariable String role) {
         return shiftRepository.findByRequiredRole(role);
     }
-    
+    @GetMapping("/remove/{id}")
+    @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeShift(@PathVariable UUID id) {
+        shiftRepository.deleteById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Shift createShift(@RequestBody @Valid CreateShiftRequest request) {

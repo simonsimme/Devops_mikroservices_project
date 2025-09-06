@@ -30,7 +30,7 @@ function Login() {
       alert('Login successful!');
       const token = data.token;
       const user_id = data.userId;
-      alert(user_id)
+      
       navigate('/landing', { state: { token, user_id} });
 
       // Save token, redirect, etc.

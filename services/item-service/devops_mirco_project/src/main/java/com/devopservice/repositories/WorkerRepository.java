@@ -15,6 +15,7 @@ public interface WorkerRepository extends JpaRepository<Worker, UUID> {
 
     List<Worker> findByUserId(UUID userId);
 
+
     @Query("SELECT w FROM Worker w WHERE w.role = ?1")
     List<Worker> findWorkersByRole(String role);
 }

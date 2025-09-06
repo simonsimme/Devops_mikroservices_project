@@ -12,4 +12,6 @@ import java.util.List;
 public interface ShiftAssignmentRepository extends JpaRepository<ShiftAssignment, UUID> {
     List<ShiftAssignment> findByWorkerId(UUID workerId);
     List<ShiftAssignment> findByShiftId(UUID shiftId);
+    List<ShiftAssignment> findByShiftIdAndWorkerId(UUID shiftId, UUID workerId);
+    void deleteByShiftId(UUID shiftId);
 }
