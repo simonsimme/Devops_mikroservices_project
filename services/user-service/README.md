@@ -207,27 +207,7 @@ The service uses `application.yml` for configuration:
 - **Security**: JWT-based stateless authentication
 - **Actuator**: Health, metrics, and info endpoints enabled
 
-## 🧪 Testing
 
-### Run All Tests
-```bash
-mvn test
-```
-
-### Test Coverage
-The application includes comprehensive tests:
-- **Unit Tests**: User entity, authentication logic
-- **Integration Tests**: REST API endpoints, security filters
-- **Test Database**: H2 in-memory database
-- **Test Coverage**: 5 test cases covering critical functionality
-
-### Test Categories
-1. **ApplicationTest** - Spring context loading
-2. **UserTest** - User entity builder pattern
-3. **AuthControllerTest** - Authentication endpoints (3 tests)
-   - User registration success
-   - Duplicate email rejection
-   - Valid credential login
 
 ## 🐳 Docker Support
 
@@ -306,26 +286,7 @@ The service provides comprehensive health checks:
 - Application startup status
 - System resource availability
 
-## 🚦 Production Considerations
 
-### Security Checklist
-- [ ] Change JWT secret (`JWT_SECRET` environment variable)
-- [ ] Remove `/api/auth/users` endpoint (testing only)
-- [ ] Enable HTTPS in production
-- [ ] Configure proper CORS policies
-- [ ] Set up rate limiting
-- [ ] Enable database migrations (`spring.flyway.enabled=true`)
-
-### Performance Optimizations
-- Connection pooling configured with HikariCP
-- JPA open-in-view disabled for better performance
-- Stateless authentication for horizontal scaling
-
-### Deployment Notes
-- Service runs on port 8080 by default
-- Requires PostgreSQL database connection
-- Environment variables needed for production configuration
-- Health check endpoint available for load balancer checks
 
 ## 🤝 Contributing
 
