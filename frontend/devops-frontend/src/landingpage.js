@@ -229,10 +229,10 @@ function Schedule() {
   assignedShifts.forEach(assignment => {
     // If assignment.shift exists, use assignment.shift.date, else assignment.date
     const shiftDate = assignment.date
-      ? new Date(assignment.date).toISOString().slice(0, 10)
-      : assignment.shift && assignment.shift.date
-        ? new Date(assignment.shift.date).toISOString().slice(0, 10)
-        : null;
+  ? assignment.date
+  : assignment.shift && assignment.shift.date
+    ? assignment.shift.date
+    : null;
     if (shiftDate) {
       if (!assignedShiftsByDay[shiftDate]) assignedShiftsByDay[shiftDate] = [];
       assignedShiftsByDay[shiftDate].push(assignment);
@@ -405,7 +405,9 @@ function Schedule() {
               {calendarMatrix.map((week, i) => (
                 <tr key={i}>
                   {week.map((day, j) => {
-                    const dayKey = day ? day.toISOString().slice(0, 10) : null;
+                    const dayKey = day
+  ? `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`
+  : null;
                     const assignedForDay = dayKey ? assignedShiftsByDay[dayKey] || [] : [];
                     const isToday = day &&
                       day.getDate() === today.getDate() &&
@@ -444,11 +446,17 @@ function Schedule() {
                                   boxShadow: '0 1px 4px rgba(49,130,206,0.08)'
                                 }}>
                                   <strong>{assignment.requiredRole}</strong><br />
-                                  {assignment.startTime} - {assignment.endTime}
+                                  {assignment.startTime
+                                              ? new Date(assignment.startTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })
+                                              : ''}
+                                            -
+                                            {assignment.endTime
+                                              ? new Date(assignment.endTime).toLocaleTimeString('sv-SE',  { hour: '2-digit', minute: '2-digit' })
+                                              : ''}
                                 </div>
                               ))
                             ) : (
-                              <span style={{ color: '#bbb', fontSize: '0.95em' }}>No shift</span>
+                              <span style={{ color: '#bbb', fontSize: '0.95em' }}></span>
                             )}
                           </div>
                         ) : null}
